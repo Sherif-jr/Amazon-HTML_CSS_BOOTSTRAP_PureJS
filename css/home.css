@@ -1,0 +1,99 @@
+body{
+    background-color: #e3e6e6;
+}
+::-webkit-scrollbar{
+    width: 10px;
+    height: 10px;
+}
+::-webkit-scrollbar-track{
+    background-color: #FFF;
+}
+::-webkit-scrollbar-thumb{
+    background-color: #1998ff;;
+}
+::-webkit-scrollbar-thumb:hover{
+    background-color: #1998ff;
+}
+
+/* start div one  */
+.amazon-news .new-1{
+    background-color: #fff;
+    padding: 20px 15px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: .3s;
+}
+.amazon-news .new-1:hover{
+    box-shadow: 0 4px 8px #888;
+}
+.amazon-news .new-1 img{
+    width: 100%;
+}
+.amazon-news .new-1 h4{
+    font-size: 16px;
+    margin-bottom: 20px;
+}
+.amazon-news .new-1 a{
+    text-decoration: none;
+    padding: 10px 0 0 0;
+    display: inline-block;
+    font-size: 12px ;
+    color: #1998ff;
+}
+.amazon-news .new-1 a:hover{
+    color: #f00;
+}
+/* end div one  */
+/* satrt div two  */
+.content-home .image{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* end div two */
+/* start div three */
+
+.slides-images .images-slide{
+    background-color: #fff;
+    display: flex;
+    overflow: auto;
+    height: 200px;
+}
+.slides-images .images-slide img{
+    width: 100%;
+    margin: 20px;
+    cursor: pointer;
+}
+.slides-images h4{
+    font-size: 16px;
+}
+.slides-images .text{
+    margin: 0;
+    display: flex;
+    padding: 7px 20px 0 20px;
+    background-color: #fff;
+}
+.slides-images .text a{
+    margin-left: 10px;
+    color: #0a497e;
+    text-decoration: none;
+    font-size: 12px;
+}
+.slides-images .text a:hover{
+    color: #f00;
+}
+.slides-images .hello{
+    overflow: hidden;
+}
+@media (max-width:969px) {
+    .slides-images .hello {
+        overflow: auto;
+    }
+}
+.slide-final img{
+    width: 100%;
+    cursor: pointer;
+}
+/* end div three */
