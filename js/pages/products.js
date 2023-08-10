@@ -1,6 +1,8 @@
 const productsContainer = document.querySelector(".container");
-
+const spinner = document.getElementById("spinnerContainer");
 const category = new URL(window.location.href).searchParams.get("category");
+spinner.style.display = "flex";
+
 if (category) {
   getAllproductsOfaCategory(category, (products) => {
     products.mapToHTMLelements(
@@ -55,6 +57,8 @@ if (category) {
       `<div class="row row-1"></div>`,
       3
     );
+    spinner.style.display = "none";
+
   });
 } else {
   getAllproducts((products) => {
@@ -109,4 +113,6 @@ if (category) {
       3
     );
   });
+      spinner.style.display = "none";
+
 }
