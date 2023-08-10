@@ -228,13 +228,25 @@ function checkLogin() {
     email,
     hashedPassword,
     (status) => {
-      document.getElementById("logIn").removeAttribute("href");
-      document.getElementById("logIn").textContent = email.split("@")[0];
+      if (status.success) {
+        document.getElementById("logIn").removeAttribute("href");
+        document.getElementById("logIn").innerHTML = `Hello,<br>${
+          email.split("@")[0]
+        }`;
 
-      document.getElementById("logOut").style.display = "block";
-      document.getElementById("logOut").onclick = function () {
-        logoutUser();
-      };
+        document.getElementById("logOut").style.display = "block";
+        document.getElementById("logOut").onclick = function () {
+          logoutUser();
+        };
+      } else {
+        document.getElementById("logIn").setAttribute("href", "/login.html");
+        document.getElementById("logIn").innerHTML = "Hello, Sign in";
+
+        document.getElementById("logOut").style.display = "none";
+        document.getElementById("logOut").onclick = function () {
+          logoutUser();
+        };
+      }
 
       if (
         (status.success && location === "/login.html") ||
