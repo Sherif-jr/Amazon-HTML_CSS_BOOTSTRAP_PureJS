@@ -6,7 +6,7 @@
  * @param {Function} [callbackfn]
  * @param {boolean} [newQuantity]
  */
-function addToCart(email, item, callbackfn, newQuantity) {
+function addToUserCart(email, item, callbackfn, newQuantity) {
   const request = indexedDB.open("CartDatabase", 1);
 
   request.onupgradeneeded = function (event) {
@@ -79,31 +79,96 @@ function addToCart(email, item, callbackfn, newQuantity) {
   };
 }
 
+function addToAnonCart(item) {
+  let inCart = sessionStorage.getItem("tempCart");
+  let items = [];
+  let exists = false;
+  if (inCart !== null) {
+    let cartItems = JSON.parse(inCart);
+    items = cartItems.map((cartItem) => {
+      if (cartItem.id === item.id) {
+        console.log("it exists!");
+        console.log(cartItem);
+        cartItem.quantity += 1;
+        console.log(cartItem);
+        exists = true;
+      }
+      return cartItem;
+    });
+    console.log(items);
+    if (!exists) {
+      items.push({ id: item.id, quantity: 1 });
+    }
+  } else {
+    items.push({ id: item.id, quantity: 1 });
+  }
+  sessionStorage.setItem("tempCart", JSON.stringify(items));
+}
+
+// const addToCart(item, callbackfn,temp, email){
+
+// }
+
 // Function to get the cart contents for a specific user from IndexedDB
-function getCartContents(email, callback) {
-  const request = indexedDB.open("CartDatabase", 1);
+/**
+ *
+ * @param {string} email
+ * @param {Function} callbackfn
+ * @param {boolean} local
+ */
+function getCartContents(email, callbackfn, temp) {
+  if (temp) {
+    const data = sessionStorage.getItem("tempCart");
+    if (data !== null) {
+      let cartItems = JSON.parse(data);
+      callbackfn(cartItems);
+    } else {
+      callbackfn([]);
+    }
+  } else {
+    const request = indexedDB.open("CartDatabase", 1);
 
-  request.onsuccess = function (event) {
-    const db = event.target.result;
+    request.onsuccess = function (event) {
+      const db = event.target.result;
 
-    const transaction = db.transaction(["cart"], "readonly");
-    const cartStore = transaction.objectStore("cart");
+      const transaction = db.transaction(["cart"], "readonly");
+      const cartStore = transaction.objectStore("cart");
 
-    const cartRequest = cartStore.get(email);
+      const cartRequest = cartStore.get(email);
 
-    cartRequest.onsuccess = function (event) {
-      const cartData = event.target.result;
-      const cartItems = cartData ? cartData.items : [];
+      cartRequest.onsuccess = function (event) {
+        const cartData = event.target.result;
+        const cartItems = cartData ? cartData.items : [];
 
-      callback(cartItems);
+        callbackfn(cartItems);
 
-      transaction.oncomplete = function () {
-        db.close();
+        transaction.oncomplete = function () {
+          db.close();
+        };
       };
     };
-  };
 
-  request.onerror = function () {
-    console.error("Error opening database.");
-  };
+    request.onerror = function () {
+      console.error("Error opening database.");
+    };
+  }
+}
+
+function removeFromCart(itemId, temp, removeAll) {
+  if (temp) {
+    const data = sessionStorage.getItem("tempCart");
+    const items = JSON.parse(data);
+    const itemToDelete = items.find((item) => item.id === itemId);
+    if (removeAll || itemToDelete.quantity == 1) {
+      items.splice(items.indexOf(itemToDelete), 1);
+      document.getElementById(`i${itemId}`).remove();
+    } else {
+      items[items.indexOf(itemToDelete)].quantity -= 1;
+      document.querySelector(`#i${itemId} .qty`).textContent -= 1;
+      
+    }
+    sessionStorage.setItem("tempCart", JSON.stringify(items));
+  } else {
+    
+  }
 }

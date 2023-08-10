@@ -6,24 +6,29 @@ checkLogin();
 const loginForm = document.getElementById("authForm");
 
 //submit event
-loginForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  console.log(loginForm.elements.rememberMe.value);
-  const email = loginForm.elements.email.value;
-  const password = loginForm.elements.password.value;
-  const rememberMe =
-    e.target.name === "login" ? loginForm.elements.rememberMe.checked : false;
+if (
+  window.location.pathname === "/login.html" ||
+  window.location.pathname === "/signup.html"
+) {
+  loginForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+    console.log(loginForm.elements.rememberMe.value);
+    const email = loginForm.elements.email.value;
+    const password = loginForm.elements.password.value;
+    const rememberMe =
+      e.target.name === "login" ? loginForm.elements.rememberMe.checked : false;
 
-  console.log(email);
-  console.log(password);
-  submitHandler({ email, password }, e.target.name, (success, hashedPass) => {
-    console.log(success);
-    if (success) {
-      storeLoginInfo(email, hashedPass, rememberMe);
-      window.location.href = "/";
-    }
+    console.log(email);
+    console.log(password);
+    submitHandler({ email, password }, e.target.name, (success, hashedPass) => {
+      console.log(success);
+      if (success) {
+        storeLoginInfo(email, hashedPass, rememberMe);
+        window.location.href = "/";
+      }
+    });
   });
-});
+}
 
 /**
  * This function runs on start to make sure the database exists or create the needed tables if it isn't.
@@ -61,18 +66,31 @@ async function registerUser(email, password, callback) {
   const transaction = db.transaction(["users"], "readwrite");
   const objectStore = transaction.objectStore("users");
 
+  const getUserRequest = objectStore.get(email);
+  getUserRequest.onsuccess = async function (event) {
+    const user = event.target.result;
+
+    if (user) {
+      // User already registered
+      callback({
+        success: false,
+        reason: "This email already has an account!",
+      });
+      return;
+    }
+  };
   const newUser = { email: email, password: hashedPassword };
 
   objectStore.add(newUser);
 
   transaction.oncomplete = function () {
     console.log("User registered successfully.");
-    callback(true, hashedPassword);
+    callback({ success: true }, hashedPassword);
   };
 
   transaction.onerror = function () {
     console.error("Error registering user.");
-    callback(false);
+    callback({ success: false, reason: "Something went wrong." });
   };
 
   db.close();
@@ -98,7 +116,10 @@ async function login(email, password, callback, hashed) {
 
     if (!user) {
       // User not found
-      callback(false);
+      callback({
+        success: false,
+        reason: "No account with this email in the database.",
+      });
       return;
     }
     // Compare the provided password with the hashed password using the helper function.
@@ -108,16 +129,16 @@ async function login(email, password, callback, hashed) {
 
     if (isPasswordCorrect) {
       // Password matches, authentication successful.
-      callback(true, user.password);
+      callback({ success: true }, user.password);
     } else {
       // Password doesn't match, authentication failed.
-      callback(false);
+      callback({ success: false, reason: "worng credentials." });
     }
   };
 
   getUserRequest.onerror = function () {
     // Error occurred while retrieving user data
-    callback(false);
+    callback({ success: false, reason: "Something went wrong." });
   };
 
   db.close();
@@ -187,13 +208,11 @@ function storeLoginInfo(email, hashedPass, remember) {
 
 function logoutUser() {
   // Clear the logged-in user data from localStorage
-  localStorage.removeItem("loggedInUser");
-  // You can also clear other user data like token, ID, etc., if needed
-  // localStorage.removeItem('userToken');
-  // localStorage.removeItem('userId');
-
-  // Redirect the user to the login page or any other appropriate page
-  window.location.href = "/login";
+  localStorage.removeItem("loggedInEmail");
+  localStorage.removeItem("userPassword");
+  sessionStorage.removeItem("loggedInEmail");
+  sessionStorage.removeItem("userPassword");
+  window.location.href = "/login.html";
 }
 
 function checkLogin() {
@@ -208,12 +227,24 @@ function checkLogin() {
   login(
     email,
     hashedPassword,
-    (success) => {
+    (status) => {
+      document.getElementById("logIn").removeAttribute("href");
+      document.getElementById("logIn").textContent = email.split("@")[0];
+
+      document.getElementById("logOut").style.display = "block";
+      document.getElementById("logOut").onclick = function () {
+        logoutUser();
+      };
+
       if (
-        (success && location === "/login.html") ||
-        (success && location === "/signup.html")
+        (status.success && location === "/login.html") ||
+        (status.success && location === "/signup.html")
       ) {
         window.location.href = "/";
+      } else if (status.success && location === "/cart.html") {
+        if (window.location.search !== "?auth=1") {
+          window.location.search = "?auth=1";
+        }
       }
     },
     true

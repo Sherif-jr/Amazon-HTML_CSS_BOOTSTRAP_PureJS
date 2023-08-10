@@ -7,7 +7,7 @@ if (category) {
       (arrItem) => {
         let rating = Math.floor(Number(arrItem.rating.rate));
         let ratingStars = [];
-        for (let i = 0; i <= 5; i++) {
+        for (let i = 0; i < 5; i++) {
           if (i <= rating) {
             ratingStars.push(
               `<i class="fa-solid fa-star" style="color: #ffe414;"></i>`
@@ -20,9 +20,9 @@ if (category) {
         }
         return `<div class="col-md-6 col-lg-4">
           <div class="section-1">
-            <img
+            <a href="product.html?itemId=${arrItem.id}"><img
               src="${arrItem.image}"
-              class="" alt="${arrItem.title}">
+              class="" alt="${arrItem.title}"></a>
           </div>
           <div class="card-body p-2 bg-light border border border-warning">
             <h5 class="card-title" class="text-uppercase; fw-bold fs-1">${
@@ -44,7 +44,9 @@ if (category) {
                 Math.ceil(Number(arrItem.price) * 0.14)
               }</span></p>
               <p>ships to Egypt</p>
-              <button type="button" class="btn btn-warning">add to cart</button>
+              <a href="/product.html?itemId=${
+                arrItem.id
+              }" class="btn btn-warning">add to cart</a>
             </div>
           </div>
         </div>`;

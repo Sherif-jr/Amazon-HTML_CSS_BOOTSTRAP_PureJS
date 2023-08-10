@@ -9,6 +9,30 @@
   <link rel="stylesheet" href="./css/bootstrap.min.css" />
   <link rel="stylesheet" href="./css/all.min.css" />
   <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    .product {
+      min-height: 60vh;
+      position: relative;
+    }
+
+    #spinnerContainer {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      background-color: #ffffffaf;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+      overflow: hidden;
+    }
+
+    #spinner {
+      height: 27rem;
+      width: 27rem;
+      border-width: 2rem;
+    }
+  </style>
 </head>
 
 <body>
@@ -27,10 +51,6 @@
         </div>
       </div>
       <div class="flex input">
-        <div>
-          <span>All</span>
-          <i class="fa-solid fa-caret-down"></i>
-        </div>
         <input type="text" />
         <i class="fa-solid fa-magnifying-glass search"></i>
       </div>
@@ -60,22 +80,12 @@
     <div class="second">
       <div class="second-1">
         <div>
-          <i class="fa-solid fa-bars"></i>
-          <span>All</span>
+
+          <li><a href="/products.html">All</a></li>
         </div>
       </div>
       <div class="second-2">
         <ul>
-          <li><a href="">Today's Deals</a></li>
-          <li><a href="">Prime</a></li>
-          <li><a href="phones.html">Mobile Phones</a></li>
-          <li><a href="">Electronics</a></li>
-          <li><a href="">Appliances</a></li>
-          <li><a href="">Fashion</a></li>
-          <li><a href="">Home</a></li>
-          <li><a href="">Video Game</a></li>
-          <li><a href="">Toy & Games</a></li>
-          <li><a href="">Grocery</a></li>
         </ul>
         <img src="images/rocket.png" alt="" />
       </div>
@@ -86,27 +96,28 @@
     <!-- start second nav  -->
   </header>
   <!-- end header  --><!--start editing from here-->
-  <div class="product">
+  <div class="product" id="product">
+    <div id="spinnerContainer">
+      <div id="spinner" class="spinner-border text-dark" role="status">
+        <span class="sr-only">Loading...</span>
+      </div>
+    </div>
     <div class="container-fluid w-100 p-3 h-100">
       <div class="row  w-100 p-3 h-100">
         <div class="col-4">
-          <div class="pro">
-            <img src="images/phone 2.webp" alt="" class="w-75" style="margin-right: 100px;">
+          <div class="pro" id="pro">
+            <img id="product-image" alt="" class="w-75" style="margin-right: 100px;">
           </div>
         </div>
         <div class="col-4">
           <div class="details">
             <div>
-              <h2>SAMSUNG Galaxy S23 Ultra Cell Phone, Factory Unlocked Android Smartphone, 512GB, 200MP Camera, Night
-                Mode, Long Battery Life, S Pen, US Version, 2023, Lavende</h2>
+              <h2 id="productTitle"></h2>
 
               <div>
-                <span>4.7</span>
-                <i class="fa-solid fa-star" style="color: #ffe414;"></i>
-                <i class="fa-solid fa-star" style="color: #ffe414;"></i>
-                <i class="fa-solid fa-star" style="color: #ffe414;"></i>
-                <i class="fa-solid fa-star" style="color: #ffe414;"></i>
-                <i class="fa-regular fa-star" style="color: #ffe414;"></i>
+                <span id="rating">4.7</span>
+                <span id="stars"></span>
+                (<span id="ratings"></span>)
                 <div>
                   <img src="images/amazons-choice-promo.png" class="w-50 " alt="">
                 </div>
@@ -114,21 +125,13 @@
             </div>
             <hr>
             <div>
-              <span class="text-danger fs-3">-17%</span>
-              <span class="fs-3"><sup>$</sup>1.142 <sup>96</sup></span>
-              <h5>list price:<span class="text-decoration-line-through">2.250</span></h5>
+              <span class="text-danger fs-3">-14% </span>
+              <span class="fs-3"><sup>$</sup><span class="price"></span><sup>99</sup></span>
+              <h5>list price: <span class="text-decoration-line-through old-price"></span></h5>
               <div>
-                <div class="fw-bolder">About this item</div>
+                <div class="fw-bolder">About this item:</div>
                 <ul type="disc">
-                  <li>Galaxy S23 Ultra lets you capture epic content in any setting with stunning NightographyHIGHEST
-                    PHONE CAMERA RESOLUTION: Create crystal-clear content worth sharing with Galaxy S23 Ultra’s 200MP
-                    camera — the highest camera resolution on a phone;</li>
-                  <li>HIGHEST PHONE CAMERA RESOLUTION: Create crystal-clear content worth sharing with Galaxy S23
-                    Ultra’s 200MP camera — the highest camera resolution on a phone; Whether you’re posting or printing,
-                    Galaxy S23 Ultra always does the moment justice</li>
-                  <li>WRITE, DRAW, CREATE w/ S PEN: Whether you’re in Samsung Note, Microsoft Office or Google Suite,
-                    with the built-in S Pen, you can convert handwriting to text, share your creations live and keep
-                    everything on your Galaxy S23 Ultra device</li>
+                  <li id="productDescr"></li>
                 </ul>
               </div>
             </div>
@@ -137,8 +140,8 @@
         <div class="col-4">
           <div class="border border-secondary " style="width: 100%;">
             <div>
-              <h1 class="fs-1 p-3"><sup>$</sup>1.142 <sup>96</sup></h1>
-              <p class="fs-4 p-2">$348.88 Shipping & Import Fees <br>
+              <h1 class="fs-1 p-3"><sup>$</sup><span class="price"></span><sup>99</sup></h1>
+              <p class="fs-4 p-2">$0 Shipping & Import Fees <br>
                 Deposit to Egypt Details
                 Delivery Wednesday, August 30. Order within
                 <span class="text-success">6 hrs 14 mins</span>
@@ -146,14 +149,14 @@
                 <a href="" class="text-decoration-none p-1"><i class="fa-solid fa-location-dot"
                     style="color: #000000;"></i>Deliver to Egypt</a>
               </p>
-              <button type="button" class="btn btn-warning w-75  " style="margin-left: 60px; margin-bottom: 20px;">buy now</button>
-              <button type="button" class="btn btn-danger  w-75 "style="margin-left: 60px; margin-bottom: 20px;" >Add to cart</button>
+
+              <button id="addCart" type="button" class="btn btn-warning  w-75 "
+                style="margin-left: 60px; margin-bottom: 20px;">Add
+                to
+                cart</button>
               <br>
-              <div style="margin-left: 60px; margin-bottom: 20px;">
-              <input type="checkbox" id="check">
-              <label for="check" class="fs-6" style="margin-left: 20px;">Add a gift receipt for easy returns</label>
-              </div>
-              <p class="fs-5 " style="margin-left: 20px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis voluptates consequatur natus itaque harum nulla doloremque, architecto accusantium eius minus saepe fuga dicta et at vero minima repellat aperiam quis?</p>
+
+
             </div>
           </div>
           <br>
@@ -317,9 +320,25 @@
     </div>
   </div>
   <!-- end fotter -->
+  <div id="notify" style="display: none; position: fixed; bottom: 10px; right: 20px;">
+    <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header" style="justify-content: space-between;">
+        <strong class="mr-auto" id="notiTitle"></strong>
+        <small class="text-muted">Just Now</small>
+
+      </div>
+      <div class="toast-body" id="notiBody">
+      </div>
+    </div>
+  </div>
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="./js/all.min.js"></script>
-  <script src="./js/script.js"></script>
+  <script src="./js/shared/auth.js"></script>
+  <script src="./js/shared/library.js"></script>
+  <script src="./js/shared/api.js"></script>
+  <script src="./js/shared/cart.js"></script>
+  <script src="./js/pages/general.js"></script>
+  <script src="./js/pages/product.js"></script>
 </body>
 
 </html>

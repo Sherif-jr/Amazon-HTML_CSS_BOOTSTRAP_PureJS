@@ -49,3 +49,15 @@ Array.prototype.mapToHTMLelements = function (
     }
   }
 };
+
+let notificationVisible = false;
+function notify(title, body, timeToLast, type) {
+  clearTimeout(leave);
+  document.getElementById("notiTitle").innerText = title;
+  document.getElementById("notiBody").innerText = body;
+  document.getElementById("notify").style.display = "block";
+  var leave = setTimeout(() => {
+    document.getElementById("notify").style.display = "none";
+    notificationVisible = false;
+  }, timeToLast);
+}

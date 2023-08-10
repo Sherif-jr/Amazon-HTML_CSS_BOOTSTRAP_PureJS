@@ -5,10 +5,16 @@
   <meta charset="UTF-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Product 1</title>
+  <title>Cart</title>
   <link rel="stylesheet" href="./css/bootstrap.min.css" />
   <link rel="stylesheet" href="./css/all.min.css" />
+  <link rel="stylesheet" href="./css/home.css" />
   <link rel="stylesheet" href="./css/style.css" />
+  <style>
+    #itemscontainer {
+      gap: 40px;
+    }
+  </style>
 </head>
 
 <body>
@@ -27,10 +33,6 @@
         </div>
       </div>
       <div class="flex input">
-        <div>
-          <span>All</span>
-          <i class="fa-solid fa-caret-down"></i>
-        </div>
         <input type="text" />
         <i class="fa-solid fa-magnifying-glass search"></i>
       </div>
@@ -40,10 +42,9 @@
           <i class="fa-solid fa-caret-down"></i>
         </div>
         <div class="sign">
-          <span>Hello, Sign In</span>
+          <span class="myspa"><a id="logIn">Hello, Sign In</a></span>
           <div class="flex ac">
-            <span>Accounts & Lists</span>
-            <i class="fa-solid fa-caret-down"></i>
+            <span id="logOut" style="display: none;">log out</span>
           </div>
         </div>
         <div class="sign">
@@ -66,16 +67,7 @@
       </div>
       <div class="second-2">
         <ul>
-          <li><a href="">Today's Deals</a></li>
-          <li><a href="">Prime</a></li>
-          <li><a href="phones.html">Mobile Phones</a></li>
-          <li><a href="">Electronics</a></li>
-          <li><a href="">Appliances</a></li>
-          <li><a href="">Fashion</a></li>
-          <li><a href="">Home</a></li>
-          <li><a href="">Video Game</a></li>
-          <li><a href="">Toy & Games</a></li>
-          <li><a href="">Grocery</a></li>
+
         </ul>
         <img src="images/rocket.png" alt="" />
       </div>
@@ -85,83 +77,41 @@
     </div>
     <!-- start second nav  -->
   </header>
-  <!-- end header  --><!--start editing from here-->
-  <div class="product">
-    <div class="container w-100 p-3 h-100">
-      <div class="row  w-100 p-3 h-100">
-        <div class="col-5">
-          <div class="pro">
-            <img src="images/phone 2.webp" alt="" class="w-75">
-          </div>
-        </div>
-        <div class="col-5">
-          <div class="details">
-            <div>
-              <h2>SAMSUNG Galaxy S23 Ultra Cell Phone, Factory Unlocked Android Smartphone, 512GB, 200MP Camera, Night
-                Mode, Long Battery Life, S Pen, US Version, 2023, Lavende</h2>
+  <!-- end header  -->
+  <!-- start chart  -->
+  <div class="cart-amazon">
+    <div class="container">
+      <div class="row">
+        <h4>Shopping Cart</h4>
+        <div class="row" id="itemscontainer">
+          <div class="chart-ama">
+            <img src="images/p-2.jpg" alt="">
+            <div class="text-cart">
+              <p id="title">Pampers Premium Care Diapers - Size 6, Junior, 44 Diapers</p>
+              <span class="price">$<span id="price">680.00</span></span>
+              <p>Eligible for FREE delivery</p>
 
-              <div>
-                <span>4.7</span>
-                <i class="fa-solid fa-star" style="color: #ffe414;"></i>
-                <i class="fa-solid fa-star" style="color: #ffe414;"></i>
-                <i class="fa-solid fa-star" style="color: #ffe414;"></i>
-                <i class="fa-solid fa-star" style="color: #ffe414;"></i>
-                <i class="fa-regular fa-star" style="color: #ffe414;"></i>
-                <div>
-                  <img src="images/amazons-choice-promo.png" class="w-50 " alt="">
-                </div>
-              </div>
-            </div>
-            <hr>
-            <div>
-              <span class="text-danger fs-3">-17%</span>
-              <span class="fs-3"><sup>$</sup>1.142 <sup>96</sup></span>
-              <h5>list price:<span class="text-decoration-line-through">2.250</span></h5>
-              <div>
-                <div class="fw-bolder">About this item</div>
-                <ul type="disc">
-                  <li>Galaxy S23 Ultra lets you capture epic content in any setting with stunning NightographyHIGHEST
-                    PHONE CAMERA RESOLUTION: Create crystal-clear content worth sharing with Galaxy S23 Ultra’s 200MP
-                    camera — the highest camera resolution on a phone;</li>
-                  <li>HIGHEST PHONE CAMERA RESOLUTION: Create crystal-clear content worth sharing with Galaxy S23
-                    Ultra’s 200MP camera — the highest camera resolution on a phone; Whether you’re posting or printing,
-                    Galaxy S23 Ultra always does the moment justice</li>
-                  <li>WRITE, DRAW, CREATE w/ S PEN: Whether you’re in Samsung Note, Microsoft Office or Google Suite,
-                    with the built-in S Pen, you can convert handwriting to text, share your creations live and keep
-                    everything on your Galaxy S23 Ultra device</li>
-                </ul>
-              </div>
+              <button> Qty: 1 <i class="fa-solid fa-caret-down"></i></button>
+              <span style="display: inline-block; margin-left: 10px; font-size: 20px; color: #aaa;">|</span>
+              <button class="btn btn-danger" href="">Delete</button>
+              <span style="display: inline-block; margin-left: 10px; font-size: 20px; color: #aaa;">|</span>
+              <button class="btn btn-warning">Save for later</button>
             </div>
           </div>
         </div>
-        <div class="col-2">
-          <div class="border border-secondary " style="width: 300%;">
-            <div>
-              <h1 class="fs-1 p-3"><sup>$</sup>1.142 <sup>96</sup></h1>
-              <p class="fs-4 p-2">$348.88 Shipping & Import Fees <br>
-                Deposit to Egypt Details
-                Delivery Wednesday, August 30. Order within
-                <span class="text-success">6 hrs 14 mins</span>
-                <br>
-                <a href="" class="text-decoration-none p-1"><i class="fa-solid fa-location-dot"
-                    style="color: #000000;"></i>Deliver to Egypt</a>
-              </p>
-              <button type="button" class="btn btn-warning w-75  " style="margin-left: 60px; margin-bottom: 20px;">buy now</button>
-              <button type="button" class="btn btn-danger  w-75 "style="margin-left: 60px; margin-bottom: 20px;" >Add to cart</button>
-              <br>
-              <div style="margin-left: 60px; margin-bottom: 20px;">
-              <input type="checkbox" id="check">
-              <label for="check" class="fs-6" style="margin-left: 20px;">Add a gift receipt for easy returns</label>
-              </div>
-              <p class="fs-5 " style="margin-left: 20px;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nobis voluptates consequatur natus itaque harum nulla doloremque, architecto accusantium eius minus saepe fuga dicta et at vero minima repellat aperiam quis?</p>
-            </div>
-          </div>
-          <br>
+        <div class="subtotal">
+          <p><span id="numOfItems">Subtotal ( 1 item ) :</span> <strong id="totalPrice">EGP 689.00</strong></p>
         </div>
+        <div class="empty"></div>
       </div>
+      <p class="footer-paragraph">The price and availability of items at amazon.eg are subject to change. The Cart is a
+        temporary place to store a list of your items and reflects each item's most recent price.
+
+        Do you have a gift card or promotional code? We'll ask you to enter your claim code when it's time to pay.</p>
     </div>
   </div>
-  <!--end editing from here-->
+  </div>
+  <!-- end chart  -->
   <!-- start fotter -->
   <div class="footer-f">
     <div class="btn-top">
@@ -319,7 +269,13 @@
   <!-- end fotter -->
   <script src="./js/bootstrap.bundle.min.js"></script>
   <script src="./js/all.min.js"></script>
-  <script src="./js/script.js"></script>
+  <script src="./js/shared/auth.js"></script>
+  <script src="./js/shared/api.js"></script>
+  <script src="./js/shared/library.js"></script>
+  <script src="./js/pages/general.js"></script>
+  <script src="./js/shared/cart.js"></script>
+  <script src="./js/pages/cartPage.js"></script>
+
 </body>
 
 </html>
