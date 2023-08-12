@@ -9,10 +9,10 @@ body{
     background-color: #FFF;
 }
 ::-webkit-scrollbar-thumb{
-    background-color: #1998ff;;
+    background-color: #fabd50;;
 }
 ::-webkit-scrollbar-thumb:hover{
-    background-color: #1998ff;
+    background-color: #fabd50;
 }
 
 /* start div one  */
