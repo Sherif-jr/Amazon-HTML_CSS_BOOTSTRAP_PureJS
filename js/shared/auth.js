@@ -1,4 +1,3 @@
-//TODO uncomment database creation function
 //This should ensure database is always there
 createDatabase();
 checkLogin();
@@ -12,7 +11,6 @@ if (
 ) {
   loginForm.addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log(loginForm.elements.rememberMe.value);
     const email = loginForm.elements.email.value;
     const password = loginForm.elements.password.value;
     const rememberMe =
@@ -205,7 +203,9 @@ function storeLoginInfo(email, hashedPass, remember) {
     sessionStorage.setItem("userPassword", hashedPass);
   }
 }
-
+/**
+ * Clears local/session storage.
+ */
 function logoutUser() {
   // Clear the logged-in user data from localStorage
   localStorage.removeItem("loggedInEmail");
@@ -215,6 +215,9 @@ function logoutUser() {
   window.location.href = "/login.html";
 }
 
+/**
+ * Takes whatever in local or session storage and tries to login using it to make sure it's valid.
+ */
 function checkLogin() {
   const location = window.location.pathname;
   const email =
@@ -224,43 +227,55 @@ function checkLogin() {
     sessionStorage.getItem("userPassword") ||
     localStorage.getItem("userPassword");
 
-  login(
-    email,
-    hashedPassword,
-    (status) => {
-      if (status.success) {
-        document.getElementById("logIn").removeAttribute("href");
-        document.getElementById("logIn").innerHTML = `Hello,<br>${
-          email.split("@")[0]
-        }`;
+  if (email && hashedPassword) {
+    login(
+      email,
+      hashedPassword,
+      (status) => {
+        uiLoginStateChange(status.success, email);
 
-        document.getElementById("logOut").style.display = "block";
-        document.getElementById("logOut").onclick = function () {
-          logoutUser();
-        };
-      } else {
-        document.getElementById("logIn").setAttribute("href", "/login.html");
-        document.getElementById("logIn").innerHTML = "Hello, Sign in";
-
-        document.getElementById("logOut").style.display = "none";
-        document.getElementById("logOut").onclick = function () {
-          logoutUser();
-        };
-      }
-
-      if (
-        (status.success && location === "/login.html") ||
-        (status.success && location === "/signup.html")
-      ) {
-        window.location.href = "/";
-      } else if (status.success && location === "/cart.html") {
-        if (window.location.search !== "?auth=1") {
-          window.location.search = "?auth=1";
+        if (
+          (status.success && location === "/login.html") ||
+          (status.success && location === "/signup.html")
+        ) {
+          window.location.href = "/";
+        } else if (status.success && location === "/cart.html") {
+          if (window.location.search !== "?auth=1") {
+            window.location.search = "?auth=1";
+          }
         }
-      }
-    },
-    true
-  );
+      },
+      true
+    );
+  } else {
+    uiLoginStateChange(false);
+  }
+}
+/**
+ * Changes some ui elements based on login.
+ * @param {boolean} login
+ */
+function uiLoginStateChange(login, email) {
+  const headerLogIn = document.getElementById("logIn");
+  const headerLogOut = document.getElementById("logOut");
+  if (headerLogIn && headerLogOut) {
+    if (login) {
+      document.getElementById("logIn").removeAttribute("href");
+      document.getElementById("logIn").innerHTML = `Hello,<br>${
+        email.split("@")[0]
+      }`;
+
+      document.getElementById("logOut").style.display = "block";
+      document.getElementById("logOut").onclick = function () {
+        logoutUser();
+      };
+    } else {
+      document.getElementById("logIn").innerHTML = "Hello, Sign in";
+      document.getElementById("logIn").setAttribute("href", "/login.html");
+
+      document.getElementById("logOut").style.display = "none";
+    }
+  }
 }
 
 /**

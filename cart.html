@@ -42,19 +42,21 @@
           <i class="fa-solid fa-caret-down"></i>
         </div>
         <div class="sign">
-          <span class="myspa"><a id="logIn">Hello, Sign In</a></span>
+          <span class="myspa"><a style="color: inherit; text-decoration: inherit;" id="logIn" href="">Hello, Sign
+              In</a></span>
           <div class="flex ac">
             <span id="logOut" style="display: none;">log out</span>
           </div>
         </div>
-        <div class="sign">
-          <span>Orders</span>
-        </div>
-        <div class="flex cart">
-          <i class="fa-solid fa-cart-shopping"></i>
-          <span class="ca">Cart</span>
-        </div>
       </div>
+      <div class="sign">
+        <span>Orders</span>
+      </div>
+      <div class="flex cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="ca">Cart</span>
+      </div>
+    </div>
     </div>
     <!-- end frist nav  -->
     <!-- start second nav  -->
@@ -84,22 +86,28 @@
       <div class="row">
         <h4>Shopping Cart</h4>
         <div class="row" id="itemscontainer">
-          <div class="chart-ama">
-            <img src="images/p-2.jpg" alt="">
-            <div class="text-cart">
-              <p id="title">Pampers Premium Care Diapers - Size 6, Junior, 44 Diapers</p>
-              <span class="price">$<span id="price">680.00</span></span>
-              <p>Eligible for FREE delivery</p>
+          <div id="empty" class="cart-empty">
+            <div class="container">
+              <div class="row">
+                <div class="empty-cart">
+                  <div class="div-one">
+                    <h3>Your Amazon Cart is empty.</h3>
+                    <p>
+                      Your shopping basket lives to serve. Give it purpose – fill it
+                      with groceries, clothing, household supplies, electronics and
+                      more. Continue shopping on the amazon.eg homepage, learn about
+                      Today's Deals, or visit your Wish List.
+                    </p>
+                  </div>
+                  <hr />
 
-              <button> Qty: 1 <i class="fa-solid fa-caret-down"></i></button>
-              <span style="display: inline-block; margin-left: 10px; font-size: 20px; color: #aaa;">|</span>
-              <button class="btn btn-danger" href="">Delete</button>
-              <span style="display: inline-block; margin-left: 10px; font-size: 20px; color: #aaa;">|</span>
-              <button class="btn btn-warning">Save for later</button>
+                </div>
+              </div>
             </div>
           </div>
+
         </div>
-        <div class="subtotal">
+        <div id="subtotal" class="subtotal">
           <p><span id="numOfItems">Subtotal ( 1 item ) :</span> <strong id="totalPrice">EGP 689.00</strong></p>
         </div>
         <div class="empty"></div>
