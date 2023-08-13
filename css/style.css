@@ -285,7 +285,7 @@ body{
   margin-top: 20px;
 }
 .row .col-4{
-  cursor: pointer;
+  /* cursor: pointer; */
 }
 .row .section-1{
   background-color:#f7f7f7;
