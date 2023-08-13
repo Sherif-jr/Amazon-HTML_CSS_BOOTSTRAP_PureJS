@@ -18,3 +18,15 @@ Using the compination of browser's local,session, indexedDB storge api's, this s
 6. sessionStorage
 7. browser IndexedDB
 8. bcrypt.js
+
+---
+
+### Features:
+
+1. Sign up & login
+   You can sign up using multiple accounts. No duplicates.
+2. Cart
+   Items in cart are linked to user email. so each user will have their own cart.
+   Anonymous users have a session cart that will be reset on the end of a session.
+3. Totally dynamic pages (based on the api).
+4. Form validation.
