@@ -82,14 +82,14 @@ function addToUserCart(email, itemId, callbackfn, newQuantity) {
   };
 }
 
-function addToAnonCart(item) {
+function addToAnonCart(itemId) {
   let inCart = sessionStorage.getItem("tempCart");
   let items = [];
   let exists = false;
   if (inCart !== null) {
     let cartItems = JSON.parse(inCart);
     items = cartItems.map((cartItem) => {
-      if (cartItem.id === item.id) {
+      if (cartItem.id === itemId) {
         console.log("it exists!");
         console.log(cartItem);
         cartItem.quantity += 1;
@@ -100,10 +100,10 @@ function addToAnonCart(item) {
     });
     console.log(items);
     if (!exists) {
-      items.push({ id: item.id, quantity: 1 });
+      items.push({ id: itemId, quantity: 1 });
     }
   } else {
-    items.push({ id: item.id, quantity: 1 });
+    items.push({ id: itemId, quantity: 1 });
   }
   sessionStorage.setItem("tempCart", JSON.stringify(items));
 }
@@ -134,9 +134,9 @@ function updateUserCart(email, itemsArr) {
     cartStore.put({ email: email, items: itemsArr });
   };
 }
-// Function to get the cart contents for a specific user from IndexedDB
+
 /**
- *
+ * Function to get the cart contents for a specific user from IndexedDB.
  * @param {string} email
  * @param {Function} callbackfn
  * @param {boolean} local

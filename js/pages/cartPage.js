@@ -66,7 +66,9 @@ if (authState && authState !== "0") {
             <p>Eligible for FREE delivery</p>
 
             <p> Qty: <span class="qty">${cartItems[i].quantity}</span></p>
-            <button class="btn btn-success">+</button>
+            <button class="btn btn-success" onclick="console.log('A');addToAnonCart(${
+              arrItem.id
+            });uiAddOneMore(${arrItem.id});">+</button>
             <span style="display: inline-block; margin-left: 10px; font-size: 20px; color: #aaa;">|</span>
             <button class="btn btn-warning" onclick="removeFromCart(${
               arrItem.id
