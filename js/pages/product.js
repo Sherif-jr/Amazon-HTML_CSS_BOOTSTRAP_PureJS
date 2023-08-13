@@ -56,7 +56,12 @@ if (item) {
 addCartBtn.onclick = function () {
   if (item) {
     fetchProduct(item, (product) => {
-      addToAnonCart(product);
+      console.log(product);
+      addToCart(product.id, (success) => {
+        if (success) {
+          notify("Add to Cart", "Item was added to cart successfully!", 5000);
+        }
+      });
       notify("Add to Cart", "Item was added to cart successfully!", 5000);
     });
   }

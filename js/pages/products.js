@@ -48,7 +48,7 @@ if (category) {
               <p>ships to Egypt</p>
               <a href="/product.html?itemId=${
                 arrItem.id
-              }" class="btn btn-warning">add to cart</a>
+              }" class="btn btn-warning">View details</a>
             </div>
           </div>
         </div>`;
@@ -58,7 +58,6 @@ if (category) {
       3
     );
     spinner.style.display = "none";
-
   });
 } else {
   getAllproducts((products) => {
@@ -113,6 +112,5 @@ if (category) {
       3
     );
   });
-      spinner.style.display = "none";
-
+  spinner.style.display = "none";
 }

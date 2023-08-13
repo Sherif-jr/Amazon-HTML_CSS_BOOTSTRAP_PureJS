@@ -3,6 +3,7 @@ createDatabase();
 checkLogin();
 //html elements
 const loginForm = document.getElementById("authForm");
+const formError = document.getElementById("formError");
 
 //submit event
 if (
@@ -18,13 +19,20 @@ if (
 
     console.log(email);
     console.log(password);
-    submitHandler({ email, password }, e.target.name, (success, hashedPass) => {
-      console.log(success);
-      if (success) {
-        storeLoginInfo(email, hashedPass, rememberMe);
-        window.location.href = "/";
+    console.log(e.target.attributes.name.value);
+    submitHandler(
+      { email, password },
+      e.target.attributes.name.value,
+      (success, hashedPass) => {
+        console.log(success);
+        if (success.success) {
+          storeLoginInfo(email, hashedPass, rememberMe);
+          window.location.href = "/";
+        } else {
+          formError.textContent = success.reason;
+        }
       }
-    });
+    );
   });
 }
 
@@ -88,7 +96,7 @@ async function registerUser(email, password, callback) {
 
   transaction.onerror = function () {
     console.error("Error registering user.");
-    callback({ success: false, reason: "Something went wrong." });
+    callback({ success: false, reason: "This email already has an account!" });
   };
 
   db.close();
